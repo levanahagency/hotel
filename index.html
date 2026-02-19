@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Helen's Hotel – L'excellence en Ngounié</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #fefefe;
+            --bg-secondary: #faf6f1;
+            --text-primary: #1e1e1e;
+            --text-secondary: #5c534b;
+            --border-color: #e8dfd5;
+            --card-bg: #ffffff;
+            --accent: #e9c46a;
+            --accent-hover: #d4a95c;
+            --gold: #b4945c;
+            --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            --shadow-hover: 0 35px 60px -15px rgba(180, 148, 92, 0.2);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #121212;
+                --bg-secondary: #1e1a16;
+                --text-primary: #f0f0f0;
+                --text-secondary: #b8aba0;
+                --border-color: #3a332c;
+                --card-bg: #1f1b17;
+                --accent: #b4945c;
+                --accent-hover: #c9a96b;
+                --gold: #c9a96b;
+            }
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        h1, h2, h3, .page-title, .logo-text, .room-header h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ===== HEADER LUXE AVEC ESPACEMENT AJUSTÉ ===== */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(180, 148, 92, 0.15);
+            z-index: 100;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            header {
+                background: rgba(18, 18, 18, 0.85);
+            }
+        }
+
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+        }
+
+        .logo-link {
+            text-decoration: none;
+            cursor: pointer;
+            margin-right: auto;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 1px;
+            white-space: nowrap;
+            padding-left: 0.5rem;
+        }
+        .logo-text span {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-size: 0.9rem;
+            color: var(--gold);
+            margin-left: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            margin-right: 0.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary) !important;
+            font-weight: 400;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            padding: 0.3rem 0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Lien actif surligné */
+        .nav-links a.active {
+            color: var(--gold) !important;
+        }
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: block;
+            font-size: 1.4rem;
+            color: var(--text-primary) !important;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            background: transparent;
+            margin-right: 0.5rem;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100vh;
+            background: var(--card-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 5rem 2rem 2rem;
+            transition: left 0.3s ease;
+            z-index: 999;
+            box-shadow: 5px 0 40px rgba(0,0,0,0.1);
+        }
+
+        .mobile-menu.active {
+            left: 0;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+        }
+
+        .mobile-menu li {
+            margin-bottom: 1.8rem;
+        }
+
+        .mobile-menu a {
+            text-decoration: none;
+            color: var(--text-primary) !important;
+            font-size: 1.2rem;
+            font-weight: 400;
+            font-family: 'Cormorant Garamond', serif;
+            transition: color 0.3s;
+            display: block;
+            padding: 0.3rem 0;
+            border-bottom: 1px solid transparent;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--gold) !important;
+            border-bottom-color: var(--gold);
+        }
+
+        .mobile-menu a.active {
+            color: var(--gold) !important;
+            border-bottom-color: var(--gold);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 998;
+            backdrop-filter: blur(3px);
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ===== BOUTONS LUXE ===== */
+        .btn {
+            background: var(--gold);
+            color: #1e1e1e !important;
+            border: none;
+            padding: 0.9rem 2.2rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border-radius: 0;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border: 1px solid transparent;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #1e1e1e;
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn:hover {
+            color: var(--gold) !important;
+            border-color: var(--gold);
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        /* ===== PAGES ===== */
+        .page {
+            min-height: 100vh;
+            padding: 5.5rem 0 3rem;
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeUp 0.7s ease;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Image principale */
+        .main-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 0;
+            box-shadow: var(--shadow);
+            margin: 0 0 2rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Titres */
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+        }
+
+        .page-sub {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.8rem;
+            font-weight: 300;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Bulles de services */
+        .services-bubbles {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .service-bubble {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .service-bubble:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-bubble span {
+            background: transparent;
+            width: 60px;
+            height: 60px;
+            border-radius: 0;
+            border: 1px solid var(--gold);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .service-bubble:hover span {
+            background: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .service-bubble i {
+            color: var(--gold);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .service-bubble:hover i {
+            color: #1e1e1e;
+        }
+
+        .service-bubble p {
+            font-weight: 400;
+            color: var(--text-primary);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Grille chambres */
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin: 1.8rem 0;
+        }
+
+        .room-card-detailed {
+            background: var(--card-bg);
+            border-radius: 0;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .room-card-detailed::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: var(--gold);
+            transition: height 0.4s ease;
+        }
+
+        .room-card-detailed:hover::before {
+            height: 100%;
+        }
+
+        .room-card-detailed:hover {
+            border-color: var(--gold);
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-5px);
+        }
+
+        .room-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .room-header h3 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .room-badge {
+            background: transparent;
+            padding: 0.2rem 1rem;
+            border: 1px solid var(--gold);
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--gold);
+            letter-spacing: 0.5px;
+        }
+
+        .room-image-container {
+            margin: 0.8rem 0 1.2rem;
+            height: 180px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .room-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.7s;
+        }
+
+        .room-card-detailed:hover .room-image-container img {
+            transform: scale(1.05);
+        }
+
+        .room-price-detailed {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin: 0.8rem 0 1rem;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .room-price-detailed small {
+            font-size: 0.8rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .payment-note {
+            font-size: 0.75rem;
+            color: var(--gold);
+            font-weight: 400;
+            margin-bottom: 0.8rem;
+            padding: 0.3rem 0.8rem;
+            border: 1px dashed var(--gold);
+            display: inline-block;
+            letter-spacing: 0.5px;
+        }
+
+        .equipements-detailed {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1.2rem 0 0.5rem;
+        }
+        .equip-item {
+            background: transparent;
+            padding: 0.3rem 0.8rem;
+            border: 1px solid var(--border-color);
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: var(--text-primary);
+            transition: all 0.3s;
+        }
+        .equip-item i {
+            color: var(--gold);
+        }
+        .equip-item:hover {
+            border-color: var(--gold);
+        }
+
+        .infra-special {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-left: 3px solid var(--gold);
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            font-style: italic;
+        }
+
+        /* Restaurant */
+        .resto-showcase {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .resto-block {
+            background: var(--card-bg);
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: border-color 0.3s;
+            position: relative;
+        }
+
+        .resto-block:hover {
+            border-color: var(--gold);
+        }
+
+        .resto-block h3 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 1.2rem;
+            color: var(--text-primary);
+            font-family: 'Cormorant Garamond', serif;
+            position: relative;
+            display: inline-block;
+        }
+
+        .resto-block h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--gold);
+        }
+
+        .resto-block img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            margin: 1rem 0 1.2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .resto-menu {
+            list-style: none;
+            margin: 1.2rem 0;
+            columns: 1;
+        }
+        .resto-menu li {
+            margin-bottom: 0.7rem;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            color: var(--text-primary);
+        }
+        .resto-menu li i {
+            color: var(--gold);
+            width: 20px;
+        }
+
+        .important-note {
+            background: var(--bg-secondary);
+            padding: 1.2rem;
+            margin: 1.2rem 0;
+            border: 1px dashed var(--gold);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+        .important-note a {
+            color: var(--gold) !important;
+            text-decoration: none;
+            border-bottom: 1px solid var(--gold);
+            font-weight: 500;
+        }
+
+        /* Contact */
+        .contact-prestige {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .contact-prestige::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid var(--gold);
+            pointer-events: none;
+        }
+
+        .contact-phones-large {
+            font-size: 1.6rem;
+            font-weight: 600;
+            line-height: 1.4;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .contact-phones-large a {
+            color: var(--gold) !important;
+            text-decoration: none;
+            border-bottom: 1px solid var(--gold);
+            margin-right: 1rem;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .whatsapp-large, .email-large {
+            font-size: 1.1rem;
+            margin: 1.2rem 0;
+        }
+        .whatsapp-large a, .email-large a {
+            color: var(--text-primary) !important;
+            text-decoration: none;
+            border-bottom: 1px solid var(--gold);
+        }
+        .whatsapp-large i, .email-large i {
+            color: var(--gold);
+            margin-right: 0.5rem;
+        }
+
+        .meeting-room {
+            background: linear-gradient(135deg, var(--gold) 0%, #c9a96b 100%);
+            color: #1e1e1e;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+            font-weight: 500;
+            font-size: 1rem;
+            border: none;
+        }
+        .meeting-room a {
+            color: #1e1e1e !important;
+            text-decoration: none;
+            border-bottom: 1px solid #1e1e1e;
+        }
+
+        footer {
+            padding: 2.5rem 0 1.5rem;
+            color: var(--text-secondary);
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Desktop */
+        @media (min-width: 1024px) {
+            body { font-size: 16px; }
+            .container { padding: 0 4rem; }
+            .logo-text { font-size: 2rem; padding-left: 1rem; }
+            .nav-links { margin-right: 1rem; }
+            .menu-toggle { display: none; }
+            .nav-links { display: flex; }
+            .main-image { height: 600px; }
+            .page-title { font-size: 4rem; }
+            .page-sub { font-size: 1.3rem; }
+            .rooms-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+            .resto-showcase { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .resto-menu { columns: 2; }
+            .contact-phones-large { font-size: 2.2rem; }
+        }
+
+        /* Mobile */
+        @media (max-width: 1023px) {
+            .nav-links { display: none; }
+            .menu-toggle { display: flex; }
+            .logo-text { font-size: 1.3rem; padding-left: 0.8rem; }
+            .logo-text span { font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay" id="overlay" onclick="closeMenu()"></div>
+    
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#" onclick="showPage('accueil'); closeMenu(); return false;" id="mobile-accueil">Accueil</a></li>
+            <li><a href="#" onclick="showPage('apropos'); closeMenu(); return false;" id="mobile-apropos">À propos</a></li>
+            <li><a href="#" onclick="showPage('chambres'); closeMenu(); return false;" id="mobile-chambres">Chambres</a></li>
+            <li><a href="#" onclick="showPage('restauration'); closeMenu(); return false;" id="mobile-restauration">Restauration</a></li>
+            <li><a href="#" onclick="showPage('contact'); closeMenu(); return false;" id="mobile-contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <header>
+        <div class="container header-flex">
+            <a href="#" class="logo-link" onclick="showPage('accueil'); return false;">
+                <div class="logo-text">Helen's Hotel <span>Mandji Ndolou</span></div>
+            </a>
+            
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#" onclick="showPage('accueil'); return false;" id="desktop-accueil">Accueil</a></li>
+                    <li><a href="#" onclick="showPage('apropos'); return false;" id="desktop-apropos">À propos</a></li>
+                    <li><a href="#" onclick="showPage('chambres'); return false;" id="desktop-chambres">Chambres</a></li>
+                    <li><a href="#" onclick="showPage('restauration'); return false;" id="desktop-restauration">Restauration</a></li>
+                    <li><a href="#" onclick="showPage('contact'); return false;" id="desktop-contact">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ACCUEIL -->
+        <div id="page-accueil" class="page active">
+            <div class="container">
+                <img class="main-image" src="images/principale.jpg" alt="Helen's Hotel" loading="lazy">
+                
+                <div class="hero-simple scroll-reveal">
+                    <h1 class="page-title">Helen's Hotel</h1>
+                    <p class="page-sub">L'art de recevoir à Mandji Ndolou. Confort absolu, services irréprochables et sérénité.</p>
+                    <a href="#" class="btn" onclick="showPage('chambres'); return false;">Découvrir nos chambres</a>
+                </div>
+
+                <div class="services-bubbles scroll-reveal">
+                    <div class="service-bubble" onclick="showPage('chambres');">
+                        <span><i class="fas fa-bed"></i></span>
+                        <p>20 chambres</p>
+                    </div>
+                    <div class="service-bubble" onclick="showPage('restauration');">
+                        <span><i class="fas fa-utensils"></i></span>
+                        <p>Restaurant Méli</p>
+                    </div>
+                    <div class="service-bubble" onclick="showPage('restauration');">
+                        <span><i class="fas fa-bread-slice"></i></span>
+                        <p>Boulangerie</p>
+                    </div>
+                    <div class="service-bubble" onclick="showPage('contact');">
+                        <span><i class="fas fa-users"></i></span>
+                        <p>Salle de réunion</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- À PROPOS -->
+        <div id="page-apropos" class="page">
+            <div class="container">
+                <h1 class="page-title scroll-reveal">Un joyau au cœur de la Ngounié</h1>
+                
+                <div style="margin: 1.5rem 0; border: 1px solid var(--border-color);" class="scroll-reveal">
+                    <img src="images/facade.jpg" alt="Helen's Hotel" style="width:100%; height:280px; object-fit:cover; display:block;" loading="lazy">
+                </div>
+                
+                <div style="background:var(--card-bg); padding:2rem; border:1px solid var(--border-color);" class="scroll-reveal">
+                    <p style="margin-bottom:1.5rem; font-size:1rem; line-height:1.8;">Nichée à Mandji Ndolou, cette maison d'exception a su conquérir le cœur des voyageurs les plus exigeants. De nombreuses personnalités ont fait d'Helen's leur étape privilégiée en Ngounié.</p>
+                    <p style="margin-bottom:1.5rem;">Chaque séjour est une promesse tenue : confort absolu, discrétion, et une attention portée aux moindres détails.</p>
+                    <p>Élégance, simplicité et authenticité définissent l'esprit des lieux.</p>
+                </div>
+
+                <div class="infra-special scroll-reveal">
+                    <p><strong>⚡ Autonomie totale</strong> – Groupe électrogène et cuve d'eau garantissent un fonctionnement ininterrompu en cas de délestage.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHAMBRES -->
+        <div id="page-chambres" class="page">
+            <div class="container">
+                <h1 class="page-title scroll-reveal">Chambres & suites</h1>
+                <p class="page-sub scroll-reveal">Paiement requis à l'arrivée</p>
+
+                <div class="rooms-grid">
+                    <!-- Chambre Classique -->
+                    <div class="room-card-detailed scroll-reveal">
+                        <div class="room-header">
+                            <h3>Chambre Classique</h3>
+                            <span class="room-badge">4 disponibles</span>
+                        </div>
+                        <div class="room-image-container">
+                            <img src="images/IMG_3883.jpg" alt="Chambre Classique" loading="lazy">
+                        </div>
+                        <div class="payment-note">Paiement à l'arrivée</div>
+                        <div class="room-price-detailed">25 500 <small>Fcfa / nuit</small></div>
+                        <div class="equipements-detailed">
+                            <span class="equip-item"><i class="fas fa-snowflake"></i> Clim</span>
+                            <span class="equip-item"><i class="fas fa-temperature-low"></i> Réfrigérateur</span>
+                            <span class="equip-item"><i class="fas fa-desk"></i> Bureau</span>
+                            <span class="equip-item"><i class="fas fa-shower"></i> Douche</span>
+                            <span class="equip-item"><i class="fas fa-bed"></i> Lit 2 places</span>
+                        </div>
+                    </div>
+
+                    <!-- Chambre Supérieure -->
+                    <div class="room-card-detailed scroll-reveal">
+                        <div class="room-header">
+                            <h3>Chambre Supérieure</h3>
+                            <span class="room-badge">10 disponibles</span>
+                        </div>
+                        <div class="room-image-container">
+                            <img src="images/IMG_3887.jpg" alt="Chambre Supérieure" loading="lazy">
+                        </div>
+                        <div class="payment-note">Paiement à l'arrivée</div>
+                        <div class="room-price-detailed">35 500 <small>Fcfa / nuit</small></div>
+                        <div class="equipements-detailed">
+                            <span class="equip-item"><i class="fas fa-snowflake"></i> Clim</span>
+                            <span class="equip-item"><i class="fas fa-temperature-low"></i> Réfrigérateur</span>
+                            <span class="equip-item"><i class="fas fa-desk"></i> Bureau</span>
+                            <span class="equip-item"><i class="fas fa-shower"></i> Douche</span>
+                            <span class="equip-item"><i class="fas fa-bed"></i> Lit 2 places</span>
+                            <span class="equip-item"><i class="fas fa-arrows-alt"></i> Plus spacieux</span>
+                        </div>
+                    </div>
+
+                    <!-- Suite Classique -->
+                    <div class="room-card-detailed scroll-reveal">
+                        <div class="room-header">
+                            <h3>Suite Classique</h3>
+                            <span class="room-badge">2 disponibles</span>
+                        </div>
+                        <div class="room-image-container">
+                            <img src="images/IMG_5459_3.jpg" alt="Suite Classique" loading="lazy">
+                        </div>
+                        <div class="payment-note">Paiement à l'arrivée</div>
+                        <div class="room-price-detailed">65 500 <small>Fcfa / nuit</small></div>
+                        <div class="equipements-detailed">
+                            <span class="equip-item"><i class="fas fa-snowflake"></i> Clim</span>
+                            <span class="equip-item"><i class="fas fa-temperature-low"></i> Réfrigérateur</span>
+                            <span class="equip-item"><i class="fas fa-couch"></i> Salon séparé</span>
+                            <span class="equip-item"><i class="fas fa-bath"></i> Baignoire</span>
+                            <span class="equip-item"><i class="fas fa-bed"></i> King size</span>
+                        </div>
+                    </div>
+
+                    <!-- Suite Supérieure -->
+                    <div class="room-card-detailed scroll-reveal">
+                        <div class="room-header">
+                            <h3>Suite Supérieure</h3>
+                            <span class="room-badge">2 disponibles</span>
+                        </div>
+                        <div class="room-image-container">
+                            <img src="images/IMG_5443_copie.jpg" alt="Suite Supérieure" loading="lazy">
+                        </div>
+                        <div class="payment-note">Paiement à l'arrivée</div>
+                        <div class="room-price-detailed">70 500 <small>Fcfa / nuit</small></div>
+                        <div class="equipements-detailed">
+                            <span class="equip-item"><i class="fas fa-snowflake"></i> Clim</span>
+                            <span class="equip-item"><i class="fas fa-utensils"></i> Cuisine équipée</span>
+                            <span class="equip-item"><i class="fas fa-couch"></i> Grand salon</span>
+                            <span class="equip-item"><i class="fas fa-bath"></i> Baignoire</span>
+                            <span class="equip-item"><i class="fas fa-bed"></i> King size</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Studios Annexe -->
+                <div class="room-card-detailed scroll-reveal" style="margin-top: 0.5rem;">
+                    <div class="room-header">
+                        <h3>Studios Annexe</h3>
+                        <span class="room-badge">2 studios</span>
+                    </div>
+                    <div class="room-image-container">
+                        <img src="images/IMG_5444.jpg" alt="Studio Annexe" loading="lazy">
+                    </div>
+                    <div class="payment-note">📍 À 5 minutes en voiture</div>
+                    <div class="room-price-detailed">Location <small>semaine / mois</small></div>
+                    <p style="margin-bottom:1rem; font-size:0.95rem;">2 chambres, salon, cuisine équipée. Plus discret que l'hôtel.</p>
+                    <div class="equipements-detailed">
+                        <span class="equip-item"><i class="fas fa-bed"></i> 2 chambres</span>
+                        <span class="equip-item"><i class="fas fa-couch"></i> Salon</span>
+                        <span class="equip-item"><i class="fas fa-bath"></i> Salle de bain</span>
+                        <span class="equip-item"><i class="fas fa-utensils"></i> Cuisine</span>
+                        <span class="equip-item"><i class="fas fa-snowflake"></i> Clim</span>
+                    </div>
+                    <div class="important-note" style="margin-top:1rem;">
+                        <p><strong>Tarifs et disponibilités</strong> – <a href="#" onclick="showPage('contact'); return false;">Contactez la réception</a></p>
+                    </div>
+                </div>
+
+                <!-- Périodes festives -->
+                <div class="important-note scroll-reveal">
+                    <p><strong>📅 Périodes festives et événements</strong><br>
+                    Réservez à l'avance avec <strong>Airtel Money</strong> ou <strong>Moov Money</strong> pour garantir votre place (indépendance, formations pétrolières, événements).</p>
+                </div>
+
+                <!-- Autonomie -->
+                <div class="infra-special scroll-reveal">
+                    <p><strong>⚡ Autonomie totale</strong> – Groupe électrogène et cuve d'eau garantissent un fonctionnement ininterrompu en cas de délestage.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESTAURATION -->
+        <div id="page-restauration" class="page">
+            <div class="container">
+                <h1 class="page-title scroll-reveal">Saveurs & gourmandises</h1>
+
+                <div class="resto-showcase">
+                    <div class="resto-block scroll-reveal">
+                        <h3>Restaurant Méli</h3>
+                        <img src="images/restaurant.jpg" alt="Restaurant" loading="lazy">
+                        <ul class="resto-menu">
+                            <li><i class="fas fa-utensils"></i> Plats locaux</li>
+                            <li><i class="fas fa-hamburger"></i> Fast-food</li>
+                            <li><i class="fas fa-bread-slice"></i> Pâtes & salades</li>
+                            <li><i class="fas fa-carrot"></i> Légumes frais</li>
+                            <li><i class="fas fa-coffee"></i> Petits déjeuners</li>
+                        </ul>
+                        <div class="important-note">
+                            <p><strong>⏰ Temps d'attente possible</strong><br>
+                            Pour éviter l'attente, <a href="tel:+24174856886">appelez la réception</a> pour commander à l'avance.</p>
+                        </div>
+                        <p><em>Buffets sur demande</em></p>
+                    </div>
+                    
+                    <div class="resto-block scroll-reveal">
+                        <h3>Boulangerie & Pâtisserie</h3>
+                        <img src="images/patisserie.jpg" alt="Boulangerie" loading="lazy">
+                        <ul class="resto-menu">
+                            <li><i class="fas fa-bread-slice"></i> Pains frais</li>
+                            <li><i class="fas fa-bread-slice"></i> Pizzas</li>
+                            <li><i class="fas fa-bread-slice"></i> Viennoiseries</li>
+                            <li><i class="fas fa-cake"></i> Pâtisseries</li>
+                            <li><i class="fas fa-cookie"></i> Snacks & chips</li>
+                            <li><i class="fas fa-candy-cane"></i> Bonbons</li>
+                            <li><i class="fas fa-wine-bottle"></i> Boissons</li>
+                        </ul>
+                        <div class="important-note">
+                            <p><strong>🎂 Gâteaux d'anniversaire ou d'événements</strong><br>
+                            Commandes possibles – <a href="tel:+24174856886">Contactez la réception</a></p>
+                        </div>
+                        <p><strong>Ouvert tous les jours</strong> jusqu'à 19h/20h (selon affluence)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTACT -->
+        <div id="page-contact" class="page">
+            <div class="container">
+                <h1 class="page-title scroll-reveal">Contact & réservations</h1>
+                <p class="page-sub scroll-reveal">24h/24 - 7j/7</p>
+
+                <div style="margin:1.5rem 0; border:1px solid var(--border-color);" class="scroll-reveal">
+                    <img src="images/reception.jpg" alt="Accueil" style="width:100%; height:220px; object-fit:cover; display:block;" loading="lazy">
+                </div>
+
+                <div class="contact-prestige scroll-reveal">
+                    <div class="contact-phones-large">
+                        <a href="tel:+24174856886">074 85 68 86</a>
+                        <a href="tel:+241066431438">066 43 14 38</a>
+                    </div>
+                    
+                    <div class="whatsapp-large">
+                        <i class="fab fa-whatsapp"></i> 
+                        <a href="https://wa.me/24174856886" target="_blank">+241 74 85 68 86</a>
+                    </div>
+                    
+                    <div class="email-large">
+                        <i class="far fa-envelope"></i>
+                        <a href="mailto:helenshotel.contact@gmail.com">helenshotel.contact@gmail.com</a>
+                    </div>
+
+                    <hr style="border-color:var(--border-color); margin:1.5rem 0;">
+
+                    <div style="font-size:0.95rem;">
+                        Mandji Ndolou, Ngounié, Gabon
+                    </div>
+                </div>
+
+                <!-- Paiements -->
+                <div class="important-note scroll-reveal">
+                    <p><strong>📱 Paiements acceptés</strong> – Airtel Money & Moov Money pour les avances et réservations</p>
+                </div>
+
+                <!-- Salle de réunion -->
+                <div class="meeting-room scroll-reveal">
+                    <i class="fas fa-users"></i> <strong>Salle de réunion disponible</strong><br>
+                    Équipée, climatisée, avec tableau – Idéale pour réunions d'équipe.<br>
+                    <a href="tel:+24174856886">Contactez la réception pour réserver</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Helen's Hotel – Mandji Ndolou</p>
+            <p style="margin-top:0.5rem;">Confort absolu, sérénité, authenticité</p>
+        </div>
+    </footer>
+
+    <script>
+        // Fonction pour changer de page
+        function showPage(pageId) {
+            // Cacher toutes les pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(p => p.classList.remove('active'));
+            
+            // Afficher la page demandée
+            document.getElementById('page-' + pageId).classList.add('active');
+            
+            // Mettre à jour les classes actives dans les menus
+            updateActiveMenu(pageId);
+            
+            // Scroll en haut
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Mettre à jour le surlignage des menus
+        function updateActiveMenu(activePage) {
+            // Desktop
+            const desktopLinks = ['accueil', 'apropos', 'chambres', 'restauration', 'contact'];
+            desktopLinks.forEach(page => {
+                const link = document.getElementById('desktop-' + page);
+                if (link) {
+                    if (page === activePage) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                }
+            });
+            
+            // Mobile
+            desktopLinks.forEach(page => {
+                const link = document.getElementById('mobile-' + page);
+                if (link) {
+                    if (page === activePage) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                }
+            });
+        }
+
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+
+        function closeMenu() {
+            document.getElementById('mobileMenu').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        }
+
+        function checkScroll() {
+            const reveals = document.querySelectorAll('.scroll-reveal');
+            const windowHeight = window.innerHeight;
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 70) {
+                    element.classList.add('revealed');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', function() {
+            checkScroll();
+            // Initialiser le menu actif
+            updateActiveMenu('accueil');
+        });
+
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+    </script>
+</body>
+</html>
